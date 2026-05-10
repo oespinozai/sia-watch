@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#818cf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Grid pattern -->
+  <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1">
+    <line x1="0" y1="0" x2="1200" y2="630"/>
+    <line x1="1200" y1="0" x2="0" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="157" x2="1200" y2="157"/>
+    <line x1="0" y1="472" x2="1200" y2="472"/>
+  </g>
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="8" height="630" fill="url(#accent)"/>
+  <!-- Shield icon -->
+  <g transform="translate(80, 440)">
+    <path d="M0 80 L80 20 L160 80 L160 160 Q160 220 80 260 Q0 220 0 160 Z" fill="none" stroke="#10b981" stroke-width="8"/>
+    <polyline points="50,140 75,170 115,110" fill="none" stroke="#10b981" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <!-- Main text -->
+  <text x="240" y="290" font-family="Inter, system-ui, sans-serif" font-size="120" font-weight="900" fill="#ffffff" letter-spacing="-2">SIA WATCH</text>
+  <rect x="240" y="310" width="520" height="6" fill="url(#accent)" rx="3"/>
+  <text x="240" y="400" font-family="Inter, system-ui, sans-serif" font-size="36" fill="#94a3b8">UK Private Security Compliance</text>
+  <text x="240" y="450" font-family="Inter, system-ui, sans-serif" font-size="36" fill="#94a3b8">Monitoring &amp; Alerting</text>
+  <!-- Bottom bar -->
+  <rect x="0" y="580" width="1200" height="50" fill="#0f172a" opacity="0.8"/>
+  <text x="80" y="615" font-family="Inter, system-ui, sans-serif" font-size="24" fill="#64748b">Under the Alvento umbrella</text>
+  <text x="1120" y="615" font-family="Inter, system-ui, sans-serif" font-size="24" fill="#64748b" text-anchor="end">alvento.ltd</text>
+</svg>
