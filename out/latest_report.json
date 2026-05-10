@@ -1,0 +1,348 @@
+{
+  "generated_at": "2026-05-10T21:14:15+00:00",
+  "profile": {
+    "profile_name": "uk-private-security-operator",
+    "entity_name": "Example Security Ltd",
+    "priority_tags": [
+      "renewal",
+      "training",
+      "licensing",
+      "close-protection",
+      "change-notice",
+      "refresher",
+      "policy-change"
+    ],
+    "keywords": [
+      "renew",
+      "refresher",
+      "training",
+      "licence",
+      "close protection",
+      "application",
+      "licensing decisions"
+    ]
+  },
+  "material_event_count": 0,
+  "events": [
+    {
+      "source": {
+        "slug": "renew-sia-licence",
+        "name": "Renew your SIA licence",
+        "url": "https://www.gov.uk/guidance/renew-your-sia-licence",
+        "tags": [
+          "sia",
+          "renewal",
+          "private-security"
+        ],
+        "buyer_relevance": [
+          "ops",
+          "training",
+          "compliance"
+        ]
+      },
+      "priority_score": 3,
+      "matched_priority_tags": [
+        "licensing",
+        "policy-change",
+        "renewal"
+      ],
+      "diff": {
+        "status": "unchanged",
+        "reason": "No material change detected",
+        "changed_fields": []
+      },
+      "snapshot": {
+        "fetched_at": "2026-05-10T21:14:14+00:00",
+        "title": "Renew your SIA licence GOV.UK",
+        "meta_description": "Find out what you need to do to renew your SIA licence.",
+        "updated_at": "1 April 2026",
+        "content_hash": "092ddabffdba780d48fef6534807240d0ef61cc89d32b541089b63ed91158ca2",
+        "summary": "Find out what you need to do to renew your SIA licence.",
+        "headline_items": [
+          "Guidance Renew your SIA licence Find out what you need to do to renew your SIA licence.",
+          "You must apply for a renewal if you want to keep working in the same role when your current licence expires.",
+          "You are not guaranteed a licence just because you already have one.",
+          "If your licence has already expired, you must apply for a new licence .",
+          "On 1 December 2025 we updated the rules we use when making our licensing decisions.",
+          "Learn more about what we changed ."
+        ],
+        "tags": [
+          "application",
+          "licensing",
+          "policy-change",
+          "private-security",
+          "renewal",
+          "sia"
+        ],
+        "url": "https://www.gov.uk/guidance/renew-your-sia-licence"
+      }
+    },
+    {
+      "source": {
+        "slug": "apply-sia-licence",
+        "name": "Apply for an SIA licence",
+        "url": "https://www.gov.uk/guidance/apply-for-an-sia-licence",
+        "tags": [
+          "sia",
+          "application",
+          "private-security"
+        ],
+        "buyer_relevance": [
+          "recruitment",
+          "ops",
+          "compliance"
+        ]
+      },
+      "priority_score": 2,
+      "matched_priority_tags": [
+        "licensing",
+        "policy-change"
+      ],
+      "diff": {
+        "status": "unchanged",
+        "reason": "No material change detected",
+        "changed_fields": []
+      },
+      "snapshot": {
+        "fetched_at": "2026-05-10T21:14:14+00:00",
+        "title": "Apply for an SIA licence GOV.UK",
+        "meta_description": "What to do before you apply, and how to apply for a licence yourself or through your employer.",
+        "updated_at": "2 April 2026",
+        "content_hash": "4e430f0f947bc020f3df4839590cf449f0753177ff4654958025b234c0d60fbe",
+        "summary": "What to do before you apply, and how to apply for a licence yourself or through your employer.",
+        "headline_items": [
+          "Guidance Apply for an SIA licence What to do before you apply, and how to apply for a licence yourself or through your employer.",
+          "To be successful, you will need to pass all of our application checks.",
+          "But you can help your application by taking care to provide correct and complete information whenever we ask for it.",
+          "On 1 December 2025 we updated the rules we use when making our licensing decisions.",
+          "Learn more about what changed .",
+          "Get ready for our application checks When we get your application for an SIA licence, we will run checks on your information."
+        ],
+        "tags": [
+          "application",
+          "licensing",
+          "policy-change",
+          "private-security",
+          "sia"
+        ],
+        "url": "https://www.gov.uk/guidance/apply-for-an-sia-licence"
+      }
+    },
+    {
+      "source": {
+        "slug": "check-training-sia",
+        "name": "Check what training you need to get an SIA licence",
+        "url": "https://www.gov.uk/guidance/check-what-training-you-need-to-get-an-sia-licence",
+        "tags": [
+          "sia",
+          "training",
+          "private-security"
+        ],
+        "buyer_relevance": [
+          "training",
+          "compliance"
+        ]
+      },
+      "priority_score": 2,
+      "matched_priority_tags": [
+        "licensing",
+        "training"
+      ],
+      "diff": {
+        "status": "unchanged",
+        "reason": "No material change detected",
+        "changed_fields": []
+      },
+      "snapshot": {
+        "fetched_at": "2026-05-10T21:14:14+00:00",
+        "title": "Check what training you need to get an SIA licence GOV.UK",
+        "meta_description": "Information about licence-linked qualifications, the awarding organisations that offer these qualifications, and how to find an approved training provider.",
+        "updated_at": "1 April 2026",
+        "content_hash": "ff9a6c5d334bfb7275f8365e00278873d7b3682b8cd2767da081f1e21427752e",
+        "summary": "Information about licence-linked qualifications, the awarding organisations that offer these qualifications, and how to find an approved training provider.",
+        "headline_items": [
+          "Guidance Check what training you need to get an SIA licence Information about licence-linked qualifications, the awarding organisations that offer these qualifications, and how to find an approved training provider.",
+          "This is so we can be sure you have the skills and knowledge you need to hold a licence and do your job safely.",
+          "You do not need a licence-linked qualification to get a non-front line licence or a key holding licence .",
+          "Once you have successfully got the qualification you need for a front line licence, the awarding organisation will tell us.",
+          "We must get this notification before you can submit your licence application.",
+          "Otherwise, you will not be able to submit the application."
+        ],
+        "tags": [
+          "licensing",
+          "private-security",
+          "sia",
+          "training"
+        ],
+        "url": "https://www.gov.uk/guidance/check-what-training-you-need-to-get-an-sia-licence"
+      }
+    },
+    {
+      "source": {
+        "slug": "training-changes-sia",
+        "name": "Changes to the training you need for an SIA licence",
+        "url": "https://www.gov.uk/government/news/changes-to-the-training-you-need-for-an-sia-licence",
+        "tags": [
+          "sia",
+          "training",
+          "change-notice",
+          "private-security"
+        ],
+        "buyer_relevance": [
+          "training",
+          "ops",
+          "compliance"
+        ]
+      },
+      "priority_score": 6,
+      "matched_priority_tags": [
+        "change-notice",
+        "close-protection",
+        "licensing",
+        "refresher",
+        "renewal",
+        "training"
+      ],
+      "diff": {
+        "status": "unchanged",
+        "reason": "No material change detected",
+        "changed_fields": []
+      },
+      "snapshot": {
+        "fetched_at": "2026-05-10T21:14:14+00:00",
+        "title": "Changes to the training you need for an SIA licence GOV.UK",
+        "meta_description": "What the changes are, when they will happen, and how they affect SIA licence applicants and licence holders.",
+        "updated_at": "1 April 2026",
+        "content_hash": "a3669d6cb8f92e39bf5e7c8c46a86c5f59a607a65e3a4b1b732887cba24a0473",
+        "summary": "What the changes are, when they will happen, and how they affect SIA licence applicants and licence holders.",
+        "headline_items": [
+          "News story Changes to the training you need for an SIA licence What the changes are, when they will happen, and how they affect SIA licence applicants and licence holders.",
+          "From: Security Industry Authority Published 5 February 2021 Last updated 1 April 2026 \u2014 See all updates Changes for close protection operatives These changes apply to you if you hold, or are applying for, a close protection licence.",
+          "Changes we introduced on 1 April 2026 On 1 April 2025 we made it a requirement that you must have a \u2018refresher\u2019 qualification before you can renew your close protection licence.",
+          "You must hold a level 3 first aid qualification (FAW or equivalent) before you can take the refresher training ( read about the first aid qualifications we accept ).",
+          "You will need to show this to your training provider when you register for the course.",
+          "Changes we introduced in 2022 In 2022 we introduced an updated close protection qualification."
+        ],
+        "tags": [
+          "application",
+          "change-notice",
+          "close-protection",
+          "licensing",
+          "private-security",
+          "refresher",
+          "renewal",
+          "sia",
+          "training"
+        ],
+        "url": "https://www.gov.uk/government/news/changes-to-the-training-you-need-for-an-sia-licence"
+      }
+    },
+    {
+      "source": {
+        "slug": "check-staff-licence",
+        "name": "Check security staff have a licence to work",
+        "url": "https://www.gov.uk/check-a-private-security-licence",
+        "tags": [
+          "sia",
+          "licence-check",
+          "private-security"
+        ],
+        "buyer_relevance": [
+          "ops",
+          "hr",
+          "audit"
+        ]
+      },
+      "priority_score": 3,
+      "matched_priority_tags": [
+        "close-protection",
+        "licensing",
+        "training"
+      ],
+      "diff": {
+        "status": "unchanged",
+        "reason": "No material change detected",
+        "changed_fields": []
+      },
+      "snapshot": {
+        "fetched_at": "2026-05-10T21:14:15+00:00",
+        "title": "Check security staff have a licence to work GOV.UK",
+        "meta_description": "Check SIA licences for security staff such as door supervisors, security guards, CCTV operators and close protection operatives.",
+        "updated_at": null,
+        "content_hash": "264417d91525cc6df26608c1964368a269c40bb4652333ab9108f5cc7c662085",
+        "summary": "Check SIA licences for security staff such as door supervisors, security guards, CCTV operators and close protection operatives.",
+        "headline_items": [
+          "Check security staff have a licence to work You must check if someone has the correct security licence before hiring them for private security work.",
+          "If they do not, you must make sure they get training and a licence .",
+          "Explore the topic Recruiting and hiring"
+        ],
+        "tags": [
+          "close-protection",
+          "licence-check",
+          "licensing",
+          "private-security",
+          "sia",
+          "training"
+        ],
+        "url": "https://www.gov.uk/check-a-private-security-licence"
+      }
+    },
+    {
+      "source": {
+        "slug": "close-protection-refresher",
+        "name": "SIA announces new refresher training for close protection operatives",
+        "url": "https://www.gov.uk/government/news/sia-announces-new-refresher-training-for-close-protection-operatives",
+        "tags": [
+          "sia",
+          "training",
+          "close-protection",
+          "private-security"
+        ],
+        "buyer_relevance": [
+          "training",
+          "close-protection",
+          "compliance"
+        ]
+      },
+      "priority_score": 5,
+      "matched_priority_tags": [
+        "close-protection",
+        "licensing",
+        "refresher",
+        "renewal",
+        "training"
+      ],
+      "diff": {
+        "status": "unchanged",
+        "reason": "No material change detected",
+        "changed_fields": []
+      },
+      "snapshot": {
+        "fetched_at": "2026-05-10T21:14:15+00:00",
+        "title": "SIA announces new refresher training for close protection operatives GOV.UK",
+        "meta_description": "From Wednesday 1 April 2026, close protection operatives must undertake refresher training to renew their licence.",
+        "updated_at": null,
+        "content_hash": "f01a8770c12e763a781352ee047b3674d80856c3c56e26e5aad2c31f3c7df97e",
+        "summary": "From Wednesday 1 April 2026, close protection operatives must undertake refresher training to renew their licence.",
+        "headline_items": [
+          "Press release SIA announces new refresher training for close protection operatives From Wednesday 1 April 2026, close protection operatives must undertake refresher training to renew their licence.",
+          "From: Security Industry Authority Published 27 August 2025 The new refresher qualification will be available from 1 October 2025.",
+          "The qualification updates the safety-critical skills that close protection operatives use to keep the public safe.",
+          "The SIA is encouraging licence holders who plan to renew their licence to take the training as soon as possible.",
+          "The SIA introduced new licence-linked qualifications for close protection in April 2022.",
+          "The regulator introduced accredited \u2018top-up\u2019 awards for close protection operatives in October 2022 as a requirement for renewing licences."
+        ],
+        "tags": [
+          "close-protection",
+          "licensing",
+          "private-security",
+          "refresher",
+          "renewal",
+          "sia",
+          "training"
+        ],
+        "url": "https://www.gov.uk/government/news/sia-announces-new-refresher-training-for-close-protection-operatives"
+      }
+    }
+  ]
+}

@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIA Watch — UK private security compliance monitoring</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #131a2e;
+      --panel-2: #1a223d;
+      --text: #edf2ff;
+      --muted: #a8b3d5;
+      --line: #2b3557;
+      --accent: #73e0a9;
+      --accent-2: #6ca6ff;
+      --shadow: 0 20px 60px rgba(0,0,0,0.38);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(108,166,255,0.15), transparent 30%),
+        radial-gradient(circle at top left, rgba(115,224,169,0.1), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(var(--max), calc(100vw - 32px)); margin: 0 auto; }
+    .nav {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(11, 16, 32, 0.78);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 72px;
+    }
+    .brand { font-weight: 800; letter-spacing: 0.02em; }
+    .brand small { color: var(--muted); font-weight: 600; margin-left: 10px; }
+    .nav-links { display: flex; gap: 18px; align-items: center; }
+    .nav-links a { color: var(--muted); font-weight: 600; }
+    .nav-links a:hover { color: var(--text); }
+    .button, button {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; border: 0; cursor: pointer; border-radius: 999px;
+      padding: 14px 20px; font-weight: 800; transition: 0.2s ease;
+    }
+    .button-primary {
+      background: linear-gradient(135deg, var(--accent), #8ce9ff);
+      color: #06131b; box-shadow: 0 10px 30px rgba(115,224,169,0.25);
+    }
+    .button-primary:hover { transform: translateY(-1px); }
+    .button-secondary {
+      background: rgba(255,255,255,0.05);
+      color: var(--text); border: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero {
+      padding: 68px 0 46px;
+      display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 34px; align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--accent); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12px;
+      padding: 8px 12px; border: 1px solid rgba(115,224,169,0.18); border-radius: 999px;
+      background: rgba(115,224,169,0.08);
+    }
+    h1 {
+      font-size: clamp(2.7rem, 4vw, 4.8rem);
+      line-height: 1.04; margin: 16px 0 18px; letter-spacing: -0.04em;
+    }
+    .lead { font-size: 1.18rem; color: #dbe4fb; max-width: 720px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 14px; margin-top: 24px; color: var(--muted); font-weight: 600;
+    }
+    .hero-meta span {
+      border: 1px solid rgba(255,255,255,0.08); padding: 10px 14px; border-radius: 999px; background: rgba(255,255,255,0.03);
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(26,34,61,0.94), rgba(19,26,46,0.98));
+      border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .hero-panel {
+      padding: 24px; display: grid; gap: 18px;
+    }
+    .panel-top {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 800; border-radius: 999px; padding: 7px 10px;
+      background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid rgba(255,255,255,0.06);
+    }
+    .status-live { color: var(--accent); }
+    .status-live::before {
+      content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 12px var(--accent); display: inline-block;
+    }
+    .snapshot {
+      padding: 20px; border-radius: var(--radius-sm); background: rgba(8,12,25,0.68); border: 1px solid rgba(255,255,255,0.06);
+    }
+    .snapshot h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .snapshot p { margin: 8px 0 0; color: #d5def7; font-size: 1rem; }
+    .kpis {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    }
+    .kpi {
+      background: rgba(255,255,255,0.04); padding: 18px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.05);
+    }
+    .kpi .label { color: var(--muted); font-size: 0.95rem; }
+    .kpi .value { font-size: 1.9rem; font-weight: 800; margin-top: 6px; }
+    section { padding: 28px 0 14px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 22px; }
+    .section-head h2 { margin: 0; font-size: clamp(1.7rem, 3vw, 2.5rem); letter-spacing: -0.03em; }
+    .section-head p { margin: 8px 0 0; color: var(--muted); max-width: 760px; font-size: 1.02rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .feature { padding: 22px; }
+    .feature h3 { margin: 14px 0 8px; }
+    .feature p, .feature li { color: var(--muted); font-size: 1rem; }
+    .icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(108,166,255,0.22), rgba(115,224,169,0.18));
+      display: grid; place-items: center; font-size: 20px;
+    }
+    .workflow {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 14px;
+    }
+    .step { padding: 20px; }
+    .step .num {
+      width: 34px; height: 34px; border-radius: 999px; display: grid; place-items: center;
+      background: rgba(115,224,169,0.14); color: var(--accent); font-weight: 800; margin-bottom: 12px;
+    }
+    .step p { color: var(--muted); }
+    .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .price-card { padding: 22px; position: relative; overflow: hidden; }
+    .price-card.highlight {
+      border-color: rgba(115,224,169,0.35);
+      box-shadow: 0 18px 60px rgba(115,224,169,0.12);
+    }
+    .price { font-size: 2.2rem; font-weight: 900; margin: 10px 0 6px; }
+    .price small { font-size: 1rem; color: var(--muted); font-weight: 700; }
+    ul.clean { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; }
+    ul.clean li { color: #d7dff6; }
+    ul.clean li::before { content: "✓"; color: var(--accent); margin-right: 10px; font-weight: 900; }
+    .demo {
+      display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 18px;
+    }
+    .terminal, .quote-box, .faq-item { padding: 22px; }
+    .terminal {
+      background: #09101f; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.06); overflow: auto; min-height: 420px;
+    }
+    .terminal pre {
+      margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre-wrap; color: #ebf1ff;
+      font-size: 1rem; line-height: 1.75;
+    }
+    .quote-box p { color: var(--muted); font-size: 1rem; }
+    .cta {
+      margin: 34px 0 60px; padding: 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    }
+    .faq { display: grid; gap: 12px; }
+    .faq-item h3 { margin-top: 0; }
+    .faq-item p { color: var(--muted); }
+    .tiny { color: var(--muted); font-size: 0.95rem; }
+    footer { padding: 18px 0 44px; color: var(--muted); }
+    .demo-badge {
+      display: inline-block; font-size: 12px; font-weight: 800; border-radius: 999px; padding: 6px 10px; background: rgba(108,166,255,0.15); color: #b6d1ff;
+      border: 1px solid rgba(108,166,255,0.2); margin-bottom: 10px;
+    }
+    .report-shell {
+      display: grid; gap: 14px;
+    }
+    .report-card {
+      border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); border-radius: 16px; padding: 18px;
+    }
+    .report-card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+    .report-card p { margin: 0 0 10px; color: #d8e1fa; }
+    .report-meta {
+      display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); font-size: 0.92rem;
+    }
+    .report-meta span {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); padding: 6px 10px; border-radius: 999px;
+    }
+    @media (max-width: 980px) {
+      .hero, .demo, .workflow, .pricing, .grid-3 { grid-template-columns: 1fr; }
+      .kpis { grid-template-columns: 1fr 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: min(var(--max), calc(100vw - 20px)); }
+      .hero { padding-top: 34px; }
+      .kpis { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .button, button { width: 100%; }
+      .terminal pre { font-size: 0.92rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">SIA Watch <small>UK private security compliance monitoring</small></div>
+      <div class="nav-links">
+        <a href="#product">Product</a>
+        <a href="#demo">Live demo</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a class="button button-secondary" href="mailto:founder@siawatch.local?subject=SIA%20Watch%20pilot">Book pilot</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Live autonomous compliance intelligence for UK security firms</span>
+        <h1>Never miss an SIA rule, training or renewal change again.</h1>
+        <p class="lead">
+          SIA Watch monitors GOV.UK and SIA-related guidance continuously, detects material changes,
+          extracts the important lines, and sends buyer-ready alerts without manual research.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="mailto:founder@siawatch.local?subject=SIA%20Watch%20pilot">Start a pilot</a>
+          <a class="button button-secondary" href="#demo">See live output</a>
+        </div>
+        <div class="hero-meta">
+          <span>Built for: private security operators, close protection teams, compliance leads</span>
+          <span>Delivery: Telegram, email, change feed</span>
+          <span>Coverage: SIA renewals, training, licence-checking, policy notices</span>
+        </div>
+      </div>
+
+      <div class="card hero-panel">
+        <div class="panel-top">
+          <div><div class="pill status-live">Live monitor deployed</div></div>
+          <div class="pill">Autonomous every 6 hours</div>
+        </div>
+
+        <div class="snapshot">
+          <h3>Most recent high-priority finding</h3>
+          <div class="tiny">Close protection refresher training requirement</div>
+          <p>From Wednesday 1 April 2026, close protection operatives must undertake refresher training to renew their licence.</p>
+        </div>
+
+        <div class="kpis">
+          <div class="kpi"><div class="label">Sources monitored</div><div class="value" id="metric-sources">6</div></div>
+          <div class="kpi"><div class="label">Material items in baseline</div><div class="value" id="metric-events">6</div></div>
+          <div class="kpi"><div class="label">Delivery mode</div><div class="value" style="font-size:1.15rem">Silent on no change</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="product">
+      <div class="section-head">
+        <div>
+          <h2>What you’re selling</h2>
+          <p>This is not generic “AI compliance”. It’s a narrow, high-friction monitoring product for UK private-security operators who need to stay current on SIA changes.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="card feature"><div class="icon">🔔</div><h3>Change alerts</h3><p>Material changes only. No spammy summaries, no daily noise, no research burden on the buyer.</p></div>
+        <div class="card feature"><div class="icon">🧾</div><h3>Evidence-linked</h3><p>Every alert includes source URLs, extracted lines and update signals so the buyer can trust it fast.</p></div>
+        <div class="card feature"><div class="icon">⚙️</div><h3>Autonomous</h3><p>Already deployed as a watchdog. It runs on schedule, stores state and only notifies when something changes.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>How it works</h2>
+          <p>The business loop is simple: monitor → diff → classify → alert → retain archive.</p>
+        </div>
+      </div>
+      <div class="workflow">
+        <div class="card step"><div class="num">1</div><h3>Monitor</h3><p>Poll curated GOV.UK / SIA guidance, notices and licence-checking surfaces.</p></div>
+        <div class="card step"><div class="num">2</div><h3>Detect</h3><p>Compare each fetch against the last stored snapshot and identify material changes only.</p></div>
+        <div class="card step"><div class="num">3</div><h3>Score</h3><p>Tag content by renewal, training, close protection and other operator-relevant categories.</p></div>
+        <div class="card step"><div class="num">4</div><h3>Deliver</h3><p>Send a concise alert into Telegram or email and keep a machine-readable report archive.</p></div>
+      </div>
+    </section>
+
+    <section id="demo">
+      <div class="section-head">
+        <div>
+          <h2>Live demo</h2>
+          <p>This is wired to the shipped monitor output generated from the local deployed watchdog.</p>
+        </div>
+      </div>
+      <div class="demo">
+        <div class="card quote-box">
+          <span class="demo-badge">Buyer pitch</span>
+          <h3>For compliance managers and ops leads</h3>
+          <p>
+            “We continuously monitor the SIA/GOV.UK surfaces that matter to your operation, filter out the noise,
+            and alert you only when there is a real change to licensing, training or licence-check workflow guidance.”
+          </p>
+          <h3>What they get</h3>
+          <ul class="clean">
+            <li>Real-time alerting on SIA changes</li>
+            <li>Change-only feed with source citations</li>
+            <li>Archive of prior notices and extracted evidence</li>
+            <li>Operator-focused relevance scoring</li>
+          </ul>
+          <h3>Why they buy</h3>
+          <ul class="clean">
+            <li>Missing a renewal/training change is expensive</li>
+            <li>Official sources are fragmented and easy to ignore</li>
+            <li>Ops teams do not want to manually check GOV.UK all week</li>
+          </ul>
+        </div>
+        <div class="terminal"><div class="report-shell" id="liveReportCards"></div><pre id="liveReportFallback" style="display:none"></pre></div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="section-head">
+        <div>
+          <h2>Ready-to-sell pricing</h2>
+          <p>Simple enough to sell immediately. Start with manual onboarding and fixed delivery while you validate buyers.</p>
+        </div>
+      </div>
+      <div class="pricing">
+        <div class="card price-card"><div class="pill">Starter</div><h3>Single team</h3><div class="price">£299 <small>/month</small></div><ul class="clean"><li>Shared alert feed</li><li>Daily or instant Telegram delivery</li><li>SIA source coverage</li><li>Monthly archive export</li></ul></div>
+        <div class="card price-card highlight"><div class="pill">Best first offer</div><h3>Operations</h3><div class="price">£749 <small>/month</small></div><ul class="clean"><li>Real-time change alerts</li><li>Priority tagging and action queue</li><li>Weekly executive digest</li><li>Dedicated delivery channel</li></ul></div>
+        <div class="card price-card"><div class="pill">Managed</div><h3>Enterprise / multi-entity</h3><div class="price">£1,500+ <small>/month</small></div><ul class="clean"><li>Multi-team delivery</li><li>Custom monitored surfaces</li><li>Webhook/API export</li><li>Custom alert rules</li></ul></div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="section-head">
+        <div>
+          <h2>Objections handled</h2>
+          <p>Use these in calls or messages when someone asks whether this is just another generic AI summarizer.</p>
+        </div>
+      </div>
+      <div class="faq">
+        <div class="card faq-item"><h3>Is this already live?</h3><p>Yes. The monitor is already deployed as a scheduled watchdog and is running autonomously on a recurring interval.</p></div>
+        <div class="card faq-item"><h3>How is this different from checking GOV.UK yourself?</h3><p>It stores baseline snapshots, detects material changes, extracts the relevant lines and only alerts when something changed. That removes routine checking work entirely.</p></div>
+        <div class="card faq-item"><h3>Is this legal advice?</h3><p>No. It is a monitoring and evidence-linking product. It tells operators what changed, where it changed and why it likely matters operationally.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="card cta">
+        <div>
+          <h2 style="margin:0 0 8px">Ready to sell now</h2>
+          <div class="tiny">The autonomous backend is already deployed. This page gives you the buyer-facing layer and pricing.</div>
+        </div>
+        <div class="hero-actions" style="margin-top:0">
+          <a class="button button-primary" href="mailto:founder@siawatch.local?subject=SIA%20Watch%20pilot">Book pilot</a>
+          <a class="button button-secondary" href="#demo">Show live output</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">Built for fast validation: narrow compliance monitoring, evidence-linked alerts, no generic fluff.</footer>
+
+  <script>
+    async function loadReport() {
+      const cards = document.getElementById('liveReportCards');
+      const fallback = document.getElementById('liveReportFallback');
+      try {
+        const res = await fetch('./out/latest_report.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error('report fetch failed');
+        const payload = await res.json();
+        document.getElementById('metric-sources').textContent = payload.events.length;
+        document.getElementById('metric-events').textContent = payload.material_event_count;
+        const events = payload.events
+          .filter(e => e.diff.status !== 'unchanged')
+          .sort((a, b) => b.priority_score - a.priority_score)
+          .slice(0, 4);
+        if (!events.length) {
+          cards.innerHTML = '<div class="report-card"><h3>No material changes right now</h3><p>The watchdog is live and currently quiet because nothing changed.</p><div class="report-meta"><span>Silent mode active</span><span>Last generated: ' + payload.generated_at + '</span></div></div>';
+          return;
+        }
+        cards.innerHTML = events.map(event => {
+          const tags = (event.snapshot.tags || []).slice(0, 4).map(tag => `<span>${tag}</span>`).join('');
+          return `<div class="report-card">
+            <h3>${event.source.name}</h3>
+            <p>${event.snapshot.summary}</p>
+            <div class="report-meta">
+              <span>Status: ${event.diff.status}</span>
+              <span>Priority: ${event.priority_score}</span>
+              <span>Updated: ${event.snapshot.updated_at || 'unknown'}</span>
+              ${tags}
+            </div>
+          </div>`;
+        }).join('');
+      } catch (err) {
+        cards.style.display = 'none';
+        fallback.style.display = 'block';
+        fallback.textContent = 'Live report unavailable. Run the watchdog to regenerate ./out/latest_report.json';
+      }
+    }
+    loadReport();
+  </script>
+</body>
+</html>
