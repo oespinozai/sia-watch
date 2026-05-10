@@ -21,14 +21,24 @@
   </g>
   <!-- Left accent bar -->
   <rect x="0" y="0" width="8" height="630" fill="url(#accent)"/>
-  <!-- Shield icon -->
+  <!-- Wren bird silhouette (simplified small bird) -->
   <g transform="translate(80, 440)">
-    <path d="M0 80 L80 20 L160 80 L160 160 Q160 220 80 260 Q0 220 0 160 Z" fill="none" stroke="#10b981" stroke-width="8"/>
-    <polyline points="50,140 75,170 115,110" fill="none" stroke="#10b981" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Small round body -->
+    <ellipse cx="80" cy="150" rx="55" ry="45" fill="#10b981" opacity="0.9"/>
+    <!-- Head -->
+    <circle cx="125" cy="115" r="28" fill="#10b981" opacity="0.9"/>
+    <!-- Beak -->
+    <polygon points="153,115 170,120 153,125" fill="#10b981" opacity="0.9"/>
+    <!-- Tail -->
+    <polygon points="25,130 0,160 25,170" fill="#10b981" opacity="0.8"/>
+    <!-- Wing hint -->
+    <ellipse cx="75" cy="155" rx="30" ry="20" fill="#0f172a" opacity="0.15"/>
+    <!-- Eye -->
+    <circle cx="132" cy="110" r="5" fill="#0f172a" opacity="0.6"/>
   </g>
   <!-- Main text -->
-  <text x="240" y="290" font-family="Inter, system-ui, sans-serif" font-size="120" font-weight="900" fill="#ffffff" letter-spacing="-2">SIA WATCH</text>
-  <rect x="240" y="310" width="520" height="6" fill="url(#accent)" rx="3"/>
+  <text x="240" y="290" font-family="Inter, system-ui, sans-serif" font-size="120" font-weight="900" fill="#ffffff" letter-spacing="-2">WREN</text>
+  <rect x="240" y="310" width="300" height="6" fill="url(#accent)" rx="3"/>
   <text x="240" y="400" font-family="Inter, system-ui, sans-serif" font-size="36" fill="#94a3b8">UK Private Security Compliance</text>
   <text x="240" y="450" font-family="Inter, system-ui, sans-serif" font-size="36" fill="#94a3b8">Monitoring &amp; Alerting</text>
   <!-- Bottom bar -->
