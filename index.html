@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alvento | Wren</title>
+  <style>
+    
+    :root {
+      --bg: #121212;
+      --surface: #181818;
+      --surface-alt: #1e1e1e;
+      --surface-accent: rgba(29, 185, 84, 0.08);
+      --text: #ffffff;
+      --text-2: #a7a7a7;
+      --text-3: #535353;
+      --border: #282828;
+      --accent: #1db954;
+      --accent-hover: #1ed760;
+      --secondary: #1db954;
+      --success: #1db954;
+      --warning: #f59b23;
+      --error: #e22134;
+      --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 18px 48px rgba(0, 0, 0, 0.5);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "DM Sans", Inter, "General Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(var(--max), calc(100vw - 32px)); margin: 0 auto; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(18, 18, 18, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), #1ed760);
+      color: #000;
+      font-weight: 900;
+      box-shadow: 0 0 20px rgba(29, 185, 84, 0.3);
+    }
+    .brand-copy { display: grid; gap: 1px; }
+    .brand-copy strong {
+      font-size: 0.96rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .brand-copy small { color: var(--text-2); font-size: 0.88rem; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--text-2);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .button, button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+    .button-primary {
+      background: var(--accent);
+      color: #000;
+      box-shadow: 0 10px 24px rgba(29, 185, 84, 0.25);
+    }
+    .button-primary:hover { background: var(--accent-hover); transform: scale(1.02); }
+    .button-secondary {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text);
+    }
+    .button-secondary:hover { background: var(--surface-alt); }
+
+    main { padding-bottom: 56px; }
+    section { padding: 30px 0; }
+
+    .hero {
+      padding: 48px 0 26px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 26px;
+      align-items: start;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(29, 185, 84, 0.08);
+      color: var(--accent);
+      border: 1px solid rgba(29, 185, 84, 0.18);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    h1 {
+      margin: 14px 0 16px;
+      font-size: clamp(2.8rem, 5vw, 4.8rem);
+      line-height: 1.01;
+      letter-spacing: -0.05em;
+      max-width: 780px;
+    }
+    .lead {
+      color: var(--text-2);
+      font-size: 1.14rem;
+      max-width: 700px;
+      margin: 0;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .hero-meta span,
+    .meta-chip,
+    .report-meta span,
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-2);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+    .hero-panel {
+      padding: 22px;
+      position: sticky;
+      top: 96px;
+      display: grid;
+      gap: 16px;
+    }
+    .panel-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .status-live {
+      color: var(--secondary);
+      border-color: rgba(29, 185, 84, 0.18);
+      background: rgba(29, 185, 84, 0.06);
+    }
+    .status-live::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--success);
+      box-shadow: 0 0 0 4px rgba(29, 185, 84, 0.12);
+      display: inline-block;
+    }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .kpi {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+    .kpi .label { color: var(--text-3); font-size: 0.86rem; font-weight: 600; }
+    .kpi .value {
+      margin-top: 6px;
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+    .snapshot {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+    .snapshot h3, .report-card h3, .faq-item h3,
+    .price-card h3, .feature h3, .step h3, .sidebar-card h3 {
+      margin: 0 0 8px;
+      letter-spacing: -0.03em;
+    }
+    .snapshot p, .feature p, .step p, .faq-item p,
+    .sidebar-card p, .quote-box p, .report-card p {
+      margin: 0;
+      color: var(--text-2);
+    }
+    .tiny { color: var(--text-3); font-size: 0.92rem; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 24px;
+      align-items: start;
+    }
+    .sidebar {
+      display: grid;
+      gap: 16px;
+      position: sticky;
+      top: 96px;
+    }
+    .sidebar-card { padding: 18px; }
+    .sidebar-card ul, ul.clean {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+    ul.clean li, .sidebar-card li {
+      color: var(--text-2);
+      position: relative;
+      padding-left: 18px;
+    }
+    ul.clean li::before, .sidebar-card li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      position: absolute;
+      left: 0;
+      top: 10px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      letter-spacing: -0.04em;
+    }
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--text-2);
+      max-width: 760px;
+    }
+
+    .grid-3, .workflow, .pricing {
+      display: grid;
+      gap: 16px;
+    }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .workflow { grid-template-columns: repeat(4, 1fr); }
+    .pricing { grid-template-columns: repeat(3, 1fr); }
+
+    .feature, .step, .faq-item, .price-card, .quote-box, .report-card {
+      padding: 20px;
+    }
+    .icon, .step .num {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--surface-accent);
+      color: var(--accent);
+      border: 1px solid rgba(29, 185, 84, 0.15);
+      font-weight: 800;
+    }
+    .step .num {
+      border-radius: 10px;
+      margin-bottom: 14px;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 16px;
+    }
+    .quote-box, .terminal { min-height: 100%; }
+    .demo-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(29, 185, 84, 0.08);
+      color: var(--accent);
+      border: 1px solid rgba(29, 185, 84, 0.12);
+      font-size: 0.8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+    .terminal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .report-shell { display: grid; gap: 12px; }
+    .report-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-alt);
+    }
+    .report-meta {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .report-meta span {
+      min-height: 30px;
+      font-size: 0.82rem;
+      background: var(--surface);
+    }
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: var(--text-2);
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92rem;
+    }
+
+    .price-card.highlight {
+      border-color: rgba(29, 185, 84, 0.25);
+      box-shadow: 0 18px 42px rgba(29, 185, 84, 0.08);
+    }
+    .price {
+      margin: 8px 0 2px;
+      font-size: 2.1rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+    .price small {
+      font-size: 1rem;
+      color: var(--text-3);
+      font-weight: 700;
+    }
+
+    .cta {
+      margin-top: 8px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      background: linear-gradient(180deg, var(--surface), var(--surface-alt));
+      box-shadow: var(--shadow-md);
+    }
+
+    footer {
+      padding: 12px 0 42px;
+      color: var(--text-3);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1080px) {
+      .layout, .hero, .demo-grid, .grid-3, .workflow, .pricing { grid-template-columns: 1fr; }
+      .sidebar, .hero-panel { position: static; }
+    }
+    @media (max-width: 720px) {
+      .wrap { width: min(var(--max), calc(100vw - 20px)); }
+      .nav-links { display: none; }
+      .hero { padding-top: 26px; }
+      .hero-actions { flex-direction: column; }
+      .button, button { width: 100%; }
+      .kpis { grid-template-columns: 1fr; }
+    }
+
+  </style>
+
+  <meta name="description" content="Wren monitors UK private security compliance so your team gets alerts the moment licensing, training or renewal guidance changes. Part of the Alvento product suite." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://wren.alvento.ltd/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Wren | Alvento" />
+  <meta property="og:description" content="Compliance monitoring for UK private security firms. Tracks SIA licensing, training and renewal updates. Quiet until something changes." />
+  <meta property="og:url" content="https://wren.alvento.ltd/" />
+  <meta property="og:type" content="product" />
+  <meta property="og:site_name" content="Alvento" />
+  <meta property="og:image" content="https://wren.alvento.ltd/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@alventoltd" />
+  <meta name="twitter:title" content="Wren | Alvento" />
+  <meta name="twitter:description" content="UK private security compliance alerts. Quiet until SIA guidance changes." />
+  <meta name="twitter:image" content="https://wren.alvento.ltd/og-image.png" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Wren",
+    "description": "UK private security compliance monitoring product that alerts teams when SIA licensing, training or renewal guidance changes.",
+    "url": "https://wren.alvento.ltd",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "priceCurrency": "GBP", "availability": "https://schema.org/InStock" },
+    "provider": { "@type": "Organization", "name": "Alvento", "url": "https://alvento.ltd" },
+    "brand": { "@type": "Brand", "name": "Alvento" }
+  }
+  </script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-copy">
+          <a href="https://alvento.ltd" class="brand-name-link" style="font-weight:700;color:var(--text);">Alvento</a>
+          <small>Wren &middot; compliance monitoring product</small>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#product">Product</a>
+        <a href="#feed">Alert feed</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a class="button button-secondary" href="#pricing">See plans</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Alvento · UK private security compliance</span>
+        <h1>Wren gives security teams early warning when SIA guidance changes.</h1>
+        <p class="lead">
+          Wren helps UK private security firms catch licensing, training and renewal changes early,
+          with source-linked alerts sent into the channel their team already watches.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#feed">See sample alerts</a>
+          <a class="button button-secondary" href="#pricing">View plans</a>
+        </div>
+        <div class="hero-meta">
+          <span>Built for security companies, close protection teams and compliance leads</span>
+          <span>Delivery via email, Telegram or internal alert feed</span>
+          <span>Coverage includes renewals, training, licence checks and policy updates</span>
+        </div>
+      </div>
+
+      <aside class="card hero-panel">
+        <div class="panel-top">
+          <div class="pill status-live">Live monitor deployed</div>
+          <div class="pill">Checks every 6 hours</div>
+        </div>
+        <div class="snapshot">
+          <div class="tiny">Current high-priority baseline item</div>
+          <h3>Close protection refresher training requirement</h3>
+          <p>From Wednesday 1 April 2026, close protection operatives must undertake refresher training to renew their licence.</p>
+        </div>
+        <div class="kpis">
+          <div class="kpi">
+            <div class="label">Tracked sources</div>
+            <div class="value" id="metric-sources">6</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Live changes</div>
+            <div class="value" id="metric-events">0</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Delivery mode</div>
+            <div class="value" style="font-size:1.05rem">Quiet until change</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="layout">
+      <div>
+        <section id="product">
+          <div class="section-head">
+            <div>
+              <h2>What the service does</h2>
+              <p>Wren monitors the official pages your team would otherwise need to check by hand, then sends a clear alert when something changes that could affect staffing, training or licence renewals.</p>
+            </div>
+          </div>
+          <div class="grid-3">
+            <div class="card feature">
+              <div class="icon">01</div>
+              <h3>Clear alerts</h3>
+              <p>The feed stays quiet until something changes in a way that could affect licensing, training or licence status.</p>
+            </div>
+            <div class="card feature">
+              <div class="icon">02</div>
+              <h3>Source-linked evidence</h3>
+              <p>Each alert includes the source page, extracted lines and update signal so someone in ops can verify it quickly.</p>
+            </div>
+            <div class="card feature">
+              <div class="icon">03</div>
+              <h3>Already running</h3>
+              <p>The monitor is live, scheduled and stateful. It keeps the baseline, compares new fetches and only delivers when it finds a real change.</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-head">
+            <div>
+              <h2>How the service works</h2>
+              <p>The service checks the official pages, compares them with the last saved version, summarises the change and sends the result into email, Telegram or an internal feed.</p>
+            </div>
+          </div>
+          <div class="workflow">
+            <div class="card step">
+              <div class="num">1</div>
+              <h3>Track</h3>
+              <p>Follow the GOV.UK and SIA pages tied to training, renewals and licence checks.</p>
+            </div>
+            <div class="card step">
+              <div class="num">2</div>
+              <h3>Compare</h3>
+              <p>Compare each fetch to the last stored version and ignore pages that did not materially change.</p>
+            </div>
+            <div class="card step">
+              <div class="num">3</div>
+              <h3>Summarise</h3>
+              <p>Extract the lines that matter and reduce them into a short operational update.</p>
+            </div>
+            <div class="card step">
+              <div class="num">4</div>
+              <h3>Alert</h3>
+              <p>Send the result into email, Telegram or an internal feed and keep a record of what changed.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="feed">
+          <div class="section-head">
+            <div>
+              <h2>Example alert feed</h2>
+              <p>Here is what a live alert view looks like. When nothing has changed, the feed stays quiet instead of adding noise.</p>
+            </div>
+          </div>
+          <div class="demo-grid">
+            <div class="card quote-box">
+              <span class="demo-badge">What buyers are paying for</span>
+              <h3>Faster visibility with less checking</h3>
+              <p>Wren is for teams that need to know about a licensing or training change quickly, but do not want someone manually checking GOV.UK and SIA pages all week.</p>
+              <h3 style="margin-top:18px">Included in the feed</h3>
+              <ul class="clean">
+                <li>Change-only alerts with source citations</li>
+                <li>Operational summaries in plain English</li>
+                <li>Archive of previous notices and extracted evidence</li>
+                <li>Delivery into the buyer's preferred channel</li>
+              </ul>
+              <h3 style="margin-top:18px">Why teams buy it</h3>
+              <ul class="clean">
+                <li>Missing a training or licence change can create avoidable disruption</li>
+                <li>Manual checking is easy to forget and hard to audit</li>
+                <li>A source-linked alert is faster to trust than a vague summary</li>
+              </ul>
+            </div>
+            <div class="terminal">
+              <div class="report-shell" id="liveReportCards"></div>
+              <pre id="liveReportFallback" style="display:none"></pre>
+            </div>
+          </div>
+        </section>
+
+        <section id="pricing">
+          <div class="section-head">
+            <div>
+              <h2>Pricing</h2>
+              <p>Simple plans for teams that want fewer manual checks and faster visibility when SIA guidance changes.</p>
+            </div>
+          </div>
+          <div class="pricing">
+            <div class="card price-card">
+              <div class="pill">Starter</div>
+              <h3>Single team</h3>
+              <div class="price">£299 <small>/month</small></div>
+              <ul class="clean">
+                <li>Shared alert feed</li>
+                <li>Daily or instant delivery</li>
+                <li>SIA source coverage</li>
+                <li>Monthly archive export</li>
+              </ul>
+            </div>
+            <div class="card price-card highlight">
+              <div class="pill">Core plan</div>
+              <h3>Operations</h3>
+              <div class="price">£749 <small>/month</small></div>
+              <ul class="clean">
+                <li>Real-time change alerts</li>
+                <li>Priority tagging and action queue</li>
+                <li>Weekly digest for leadership</li>
+                <li>Dedicated delivery channel</li>
+              </ul>
+            </div>
+            <div class="card price-card">
+              <div class="pill">Managed</div>
+              <h3>Multi-entity</h3>
+              <div class="price">£1,500+ <small>/month</small></div>
+              <ul class="clean">
+                <li>Multiple teams or entities</li>
+                <li>Custom monitored surfaces</li>
+                <li>Webhook or API export</li>
+                <li>Custom alert rules</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq">
+          <div class="section-head">
+            <div>
+              <h2>Common questions</h2>
+              <p>These are the questions most teams ask before they trial the service.</p>
+            </div>
+          </div>
+          <div class="grid-3">
+            <div class="card faq-item">
+              <h3>Is this already live?</h3>
+              <p>Yes. The service is already running and the alert view on this page comes from the live monitor.</p>
+            </div>
+            <div class="card faq-item">
+              <h3>Why not just check GOV.UK manually?</h3>
+              <p>Because the service stores a baseline, detects meaningful changes and only interrupts the team when something moved.</p>
+            </div>
+            <div class="card faq-item">
+              <h3>Is this legal advice?</h3>
+              <p>No. It is a monitoring service that points operators to changes, sources and extracted evidence faster.</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="card cta">
+            <div>
+              <h2 style="margin:0 0 6px; letter-spacing:-0.04em;">Start with Wren</h2>
+              <div class="tiny">See the alert format, compare plans and decide whether Wren fits your team.</div>
+            </div>
+            <div class="hero-actions" style="margin-top:0;">
+              <a class="button button-primary" href="#feed">Review sample alerts</a>
+              <a class="button button-secondary" href="#pricing">Compare plans</a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="sidebar">
+        <div class="card sidebar-card">
+          <h3>Who this is for</h3>
+          <p>Wren is for private security teams that need quicker visibility into SIA changes without relying on manual checking.</p>
+          <ul>
+            <li>Private security operators</li>
+            <li>Close protection teams</li>
+            <li>Compliance and operations leads</li>
+          </ul>
+        </div>
+        <div class="card sidebar-card">
+          <h3>Coverage today</h3>
+          <div class="report-meta" style="margin-top:0; margin-bottom:12px;">
+            <span>Renewals</span>
+            <span>Training</span>
+            <span>Licence checks</span>
+            <span>Policy notices</span>
+          </div>
+          <p>The monitor currently covers six official surfaces tied to renewals, training and licence checks.</p>
+        </div>
+        <div class="card sidebar-card">
+          <h3>Delivery options</h3>
+          <ul>
+            <li>Email summaries</li>
+            <li>Telegram channel delivery</li>
+            <li>Internal feed or webhook export</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="wrap">Wren is an Alvento product for UK private security teams that need faster visibility into SIA changes.</footer>
+
+  <script>
+    async function loadReport() {
+      const cards = document.getElementById('liveReportCards');
+      const fallback = document.getElementById('liveReportFallback');
+      try {
+        const res = await fetch('./out/latest_report.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error('report fetch failed');
+        const payload = await res.json();
+        document.getElementById('metric-sources').textContent = payload.events.length;
+        document.getElementById('metric-events').textContent = payload.material_event_count;
+        const events = payload.events
+          .filter((e) => e.diff.status !== 'unchanged')
+          .sort((a, b) => b.priority_score - a.priority_score)
+          .slice(0, 4);
+        if (!events.length) {
+          cards.innerHTML = '<div class="report-card"><h3>No material changes right now</h3><p>The monitor is live and currently quiet because nothing changed since the last baseline.</p><div class="report-meta"><span>Quiet mode active</span><span>Last generated: ' + payload.generated_at + '</span></div></div>';
+          return;
+        }
+        cards.innerHTML = events.map((event) => {
+          const tags = (event.snapshot.tags || []).slice(0, 4).map((tag) => `<span>${tag}</span>`).join('');
+          return `<div class="report-card">
+            <h3>${event.source.name}</h3>
+            <p>${event.snapshot.summary}</p>
+            <div class="report-meta">
+              <span>Status: ${event.diff.status}</span>
+              <span>Priority: ${event.priority_score}</span>
+              <span>Updated: ${event.snapshot.updated_at || 'unknown'}</span>
+              ${tags}
+            </div>
+          </div>`;
+        }).join('');
+      } catch (err) {
+        cards.style.display = 'none';
+        fallback.style.display = 'block';
+        fallback.textContent = 'Live report unavailable. Run the watchdog to regenerate ./out/latest_report.json';
+      }
+    }
+    loadReport();
+  </script>
+</body>
+</html>

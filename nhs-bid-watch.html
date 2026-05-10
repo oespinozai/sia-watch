@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alvento | NHS Bid Watch</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --surface-alt: #f5f6fb;
+      --surface-accent: #eef2ff;
+      --text: #0a0a0a;
+      --text-2: #5c6170;
+      --text-3: #8a90a0;
+      --border: #e7e9f0;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.08);
+      --success: #0f9f6e;
+      --shadow-sm: 0 10px 28px rgba(10, 10, 10, 0.05);
+      --shadow-md: 0 24px 56px rgba(10, 10, 10, 0.08);
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 18px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(79, 70, 229, 0.08), transparent 28%),
+        radial-gradient(circle at top left, rgba(15, 159, 110, 0.05), transparent 20%),
+        var(--bg);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(var(--max), calc(100vw - 32px)); margin: 0 auto; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(250, 250, 250, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(231, 233, 240, 0.9);
+    }
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), #7c78ff);
+      color: white;
+      font-weight: 900;
+      box-shadow: var(--shadow-sm);
+    }
+    .brand-copy {
+      display: grid;
+      gap: 1px;
+    }
+    .brand-copy strong { font-size: 0.96rem; letter-spacing: -0.02em; }
+    .brand-copy small { color: var(--text-2); font-size: 0.88rem; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--text-2);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .button-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 12px 28px rgba(79, 70, 229, 0.2);
+    }
+    .button-primary:hover { background: #4338ca; }
+    .button-secondary {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text);
+    }
+    .button-secondary:hover { background: var(--surface-alt); }
+
+    main { padding-bottom: 60px; }
+    section { padding: 32px 0; }
+    .hero {
+      padding: 48px 0 26px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 28px;
+      align-items: start;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(79, 70, 229, 0.14);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    h1 {
+      margin: 14px 0 16px;
+      font-size: clamp(2.8rem, 5vw, 4.7rem);
+      line-height: 1.01;
+      letter-spacing: -0.055em;
+      max-width: 760px;
+    }
+    .lead {
+      margin: 0;
+      max-width: 720px;
+      color: var(--text-2);
+      font-size: 1.14rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .hero-meta,
+    .report-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .chip,
+    .report-meta span,
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-2);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .pill-live {
+      color: var(--success);
+      border-color: rgba(15, 159, 110, 0.18);
+      background: rgba(15, 159, 110, 0.07);
+    }
+    .pill-live::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      margin-right: 8px;
+      background: var(--success);
+      box-shadow: 0 0 0 4px rgba(15, 159, 110, 0.12);
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+    .hero-panel {
+      position: sticky;
+      top: 96px;
+      padding: 22px;
+      display: grid;
+      gap: 16px;
+    }
+    .panel-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .snapshot,
+    .metric,
+    .feature,
+    .step,
+    .price-card,
+    .faq-item,
+    .sidebar-card,
+    .report-card,
+    .cta {
+      padding: 20px;
+    }
+    .snapshot {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .tiny { color: var(--text-3); font-size: 0.92rem; }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .metric {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .metric .label { color: var(--text-3); font-size: 0.85rem; font-weight: 600; }
+    .metric .value { margin-top: 6px; font-size: 1.45rem; font-weight: 800; letter-spacing: -0.04em; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 24px;
+      align-items: start;
+    }
+    .sidebar {
+      display: grid;
+      gap: 16px;
+      position: sticky;
+      top: 96px;
+    }
+    .sidebar-card ul,
+    .clean {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+    .sidebar-card li,
+    .clean li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--text-2);
+    }
+    .sidebar-card li::before,
+    .clean li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.75rem, 3vw, 2.45rem);
+      letter-spacing: -0.04em;
+    }
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--text-2);
+      max-width: 760px;
+    }
+    .grid-3,
+    .workflow,
+    .pricing {
+      display: grid;
+      gap: 16px;
+    }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .workflow { grid-template-columns: repeat(4, 1fr); }
+    .pricing { grid-template-columns: repeat(3, 1fr); }
+    .icon,
+    .num {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      background: var(--surface-accent);
+      color: var(--accent);
+      border: 1px solid rgba(79, 70, 229, 0.12);
+      font-weight: 800;
+    }
+    .feature h3,
+    .step h3,
+    .price-card h3,
+    .faq-item h3,
+    .sidebar-card h3,
+    .report-card h3,
+    .snapshot h3 {
+      margin: 0 0 8px;
+      letter-spacing: -0.03em;
+    }
+    .feature p,
+    .step p,
+    .price-card p,
+    .faq-item p,
+    .sidebar-card p,
+    .report-card p,
+    .snapshot p {
+      margin: 0;
+      color: var(--text-2);
+    }
+
+    .report-shell {
+      display: grid;
+      gap: 14px;
+    }
+    .report-card {
+      background: linear-gradient(180deg, #ffffff, #fbfbfe);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .price-card.highlight {
+      border-color: rgba(79, 70, 229, 0.24);
+      box-shadow: 0 18px 42px rgba(79, 70, 229, 0.1);
+    }
+    .price {
+      margin: 8px 0 2px;
+      font-size: 2.05rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+    .price small { font-size: 1rem; color: var(--text-3); font-weight: 700; }
+    .cta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      background: linear-gradient(180deg, #ffffff, #f7f8fd);
+      box-shadow: var(--shadow-md);
+    }
+    footer {
+      padding: 12px 0 42px;
+      color: var(--text-3);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .layout,
+      .grid-3,
+      .workflow,
+      .pricing,
+      .metric-grid { grid-template-columns: 1fr; }
+      .hero-panel,
+      .sidebar { position: static; }
+    }
+    @media (max-width: 720px) {
+      .wrap { width: min(var(--max), calc(100vw - 20px)); }
+      .nav-links { display: none; }
+      .button { width: 100%; }
+      .hero-actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-copy">
+          <strong>Alvento</strong>
+          <small>NHS Bid Watch · procurement intelligence product</small>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#product">Product</a>
+        <a href="#feed">Signal feed</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a class="button button-secondary" href="#pricing">See plans</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Alvento · NHS supplier intelligence</span>
+        <h1>NHS Bid Watch helps suppliers catch tenders, framework changes and award notices early.</h1>
+        <p class="lead">
+          Built for vendors selling into the NHS, NHS Bid Watch monitors procurement surfaces and sends source-linked alerts when a new opportunity,
+          award notice or framework change appears.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#feed">See sample signals</a>
+          <a class="button button-secondary" href="#pricing">View plans</a>
+        </div>
+        <div class="hero-meta">
+          <span class="chip">Built for medtech, IT, cyber, staffing and service suppliers</span>
+          <span class="chip">Delivery via email, Telegram or internal bid feed</span>
+          <span class="chip">Coverage includes tenders, award notices and framework movement</span>
+        </div>
+      </div>
+
+      <aside class="card hero-panel">
+        <div class="panel-top">
+          <div class="pill pill-live">Pilot product ready</div>
+          <div class="pill">Opportunity-led alerts</div>
+        </div>
+        <div class="snapshot">
+          <div class="tiny">Example high-priority signal</div>
+          <h3>ICS cyber framework reopening</h3>
+          <p>A regional NHS buying body opens a new procurement window for cyber and digital resilience support, with a 21-day supplier response period.</p>
+        </div>
+        <div class="metric-grid">
+          <div class="metric">
+            <div class="label">Core surfaces</div>
+            <div class="value">5+</div>
+          </div>
+          <div class="metric">
+            <div class="label">Signal types</div>
+            <div class="value">3</div>
+          </div>
+          <div class="metric">
+            <div class="label">Delivery mode</div>
+            <div class="value" style="font-size:1.05rem">Change only</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="layout">
+      <div>
+        <section id="product">
+          <div class="section-head">
+            <div>
+              <h2>What the service does</h2>
+              <p>NHS Bid Watch monitors the procurement pages your team would otherwise check manually, then flags the items that matter: new tenders, award notices, framework openings and buyer movement.</p>
+            </div>
+          </div>
+          <div class="grid-3">
+            <div class="card feature">
+              <div class="icon">01</div>
+              <h3>Early bid signals</h3>
+              <p>Catch new opportunities and route them to the team before deadlines get tight or notices disappear into inbox clutter.</p>
+            </div>
+            <div class="card feature">
+              <div class="icon">02</div>
+              <h3>Source-linked evidence</h3>
+              <p>Each alert points back to the source notice, buyer and category so someone in commercial or bids can verify it quickly.</p>
+            </div>
+            <div class="card feature">
+              <div class="icon">03</div>
+              <h3>Buyer-focused triage</h3>
+              <p>Segment signals by supplier type, geography or category so your team sees fewer irrelevant notices and more likely fits.</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-head">
+            <div>
+              <h2>How the service works</h2>
+              <p>The service checks NHS procurement surfaces, compares new notices with the last saved state, extracts the commercial details and sends the result into the channel your bid team already uses.</p>
+            </div>
+          </div>
+          <div class="workflow">
+            <div class="card step">
+              <div class="num">1</div>
+              <h3>Track</h3>
+              <p>Watch Contracts Finder, Find a Tender, NHS SBS, CCS and selected Trust or ICB procurement pages.</p>
+            </div>
+            <div class="card step">
+              <div class="num">2</div>
+              <h3>Filter</h3>
+              <p>Remove duplicates and low-fit notices, then rank the remaining signals by category, buyer and likely relevance.</p>
+            </div>
+            <div class="card step">
+              <div class="num">3</div>
+              <h3>Summarise</h3>
+              <p>Pull out the deadline, buyer, category and notice type so the team can decide quickly whether to act.</p>
+            </div>
+            <div class="card step">
+              <div class="num">4</div>
+              <h3>Alert</h3>
+              <p>Send the opportunity into email, Telegram or an internal bid feed with a short plain-English summary.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="feed">
+          <div class="section-head">
+            <div>
+              <h2>Example signal feed</h2>
+              <p>Here is the type of signal a supplier would receive when NHS Bid Watch finds something new and commercially relevant.</p>
+            </div>
+          </div>
+          <div class="report-shell">
+            <div class="report-card">
+              <h3>New tender · digital diagnostics support</h3>
+              <p>An NHS Trust opens a procurement for device integration and diagnostics support services, with a deadline in 16 days and a likely fit for medtech implementation vendors.</p>
+              <div class="report-meta">
+                <span>Source: Contracts Finder</span>
+                <span>Buyer: NHS Trust</span>
+                <span>Category: medtech / digital</span>
+                <span>Priority: high</span>
+              </div>
+            </div>
+            <div class="report-card">
+              <h3>Framework movement · cyber and DSPT support</h3>
+              <p>A buying body updates a framework entry tied to cyber assurance and DSPT-adjacent support, which may reopen work for security suppliers already selling into healthcare.</p>
+              <div class="report-meta">
+                <span>Source: NHS SBS</span>
+                <span>Buyer: regional framework</span>
+                <span>Category: cyber / compliance</span>
+                <span>Priority: medium</span>
+              </div>
+            </div>
+            <div class="report-card">
+              <h3>Award notice · infrastructure services</h3>
+              <p>An award notice lands for a cloud infrastructure support contract. Even when the deal is gone, the alert still helps the team track buyer behaviour, competitors and renewal patterns.</p>
+              <div class="report-meta">
+                <span>Source: Find a Tender</span>
+                <span>Signal type: award notice</span>
+                <span>Category: infrastructure</span>
+                <span>Priority: medium</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="pricing">
+          <div class="section-head">
+            <div>
+              <h2>Pricing</h2>
+              <p>Simple plans for suppliers who want fewer missed opportunities and less manual trawling across procurement sites.</p>
+            </div>
+          </div>
+          <div class="pricing">
+            <div class="card price-card">
+              <div class="pill">Starter</div>
+              <h3>Single category</h3>
+              <div class="price">£349 <small>/month</small></div>
+              <ul class="clean">
+                <li>One supplier profile</li>
+                <li>Daily signal feed</li>
+                <li>Tender and award notice coverage</li>
+                <li>Monthly export</li>
+              </ul>
+            </div>
+            <div class="card price-card highlight">
+              <div class="pill">Core plan</div>
+              <h3>Bid team</h3>
+              <div class="price">£899 <small>/month</small></div>
+              <ul class="clean">
+                <li>Real-time change alerts</li>
+                <li>Multiple categories or keywords</li>
+                <li>Framework and buyer movement tracking</li>
+                <li>Dedicated delivery channel</li>
+              </ul>
+            </div>
+            <div class="card price-card">
+              <div class="pill">Managed</div>
+              <h3>Portfolio</h3>
+              <div class="price">£1,800+ <small>/month</small></div>
+              <ul class="clean">
+                <li>Multiple business lines</li>
+                <li>Named buyers and regions</li>
+                <li>Webhook or API export</li>
+                <li>Custom prioritisation rules</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq">
+          <div class="section-head">
+            <div>
+              <h2>Common questions</h2>
+              <p>These are the first questions most suppliers ask before trialling the service.</p>
+            </div>
+          </div>
+          <div class="grid-3">
+            <div class="card faq-item">
+              <h3>Who is this for?</h3>
+              <p>Suppliers selling into the NHS: medtech, cyber, IT, staffing and service providers that need earlier visibility into bid activity.</p>
+            </div>
+            <div class="card faq-item">
+              <h3>Does this replace a bid manager?</h3>
+              <p>No. It helps the team find and triage opportunities faster. The commercial decision and response still sit with the supplier.</p>
+            </div>
+            <div class="card faq-item">
+              <h3>Why not use generic tender portals?</h3>
+              <p>Because generic portals are noisy. NHS Bid Watch is meant to surface the notices, buyers and framework movement that fit your category more closely.</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="card cta">
+            <div>
+              <h2 style="margin:0 0 6px; letter-spacing:-0.04em;">Start with NHS Bid Watch</h2>
+              <div class="tiny">See the signal format, compare plans and decide whether NHS Bid Watch fits your commercial team.</div>
+            </div>
+            <div class="hero-actions" style="margin-top:0;">
+              <a class="button button-primary" href="#feed">Review sample signals</a>
+              <a class="button button-secondary" href="#pricing">Compare plans</a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="sidebar">
+        <div class="card sidebar-card">
+          <h3>Who this is for</h3>
+          <p>NHS Bid Watch is for suppliers who need faster visibility into NHS procurement changes without relying on manual checking.</p>
+          <ul>
+            <li>Medtech vendors</li>
+            <li>Cyber and IT suppliers</li>
+            <li>Staffing and managed service providers</li>
+          </ul>
+        </div>
+        <div class="card sidebar-card">
+          <h3>Coverage today</h3>
+          <p>The first version focuses on the surfaces most likely to create early signals for suppliers selling into NHS buyers and frameworks.</p>
+          <ul>
+            <li>Contracts Finder</li>
+            <li>Find a Tender</li>
+            <li>NHS Supply Chain and NHS SBS</li>
+            <li>Selected Trust and ICB procurement pages</li>
+          </ul>
+        </div>
+        <div class="card sidebar-card">
+          <h3>Delivery options</h3>
+          <ul>
+            <li>Email summaries</li>
+            <li>Telegram channel delivery</li>
+            <li>Internal bid feed or webhook export</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="wrap">NHS Bid Watch is an Alvento product for suppliers that need earlier visibility into NHS tenders, awards and framework changes.</footer>
+</body>
+</html>
