@@ -35,6 +35,8 @@ A real private-security operator can buy this as a low-touch subscription feed.
 - `out/latest_report.json` — machine-readable output
 - `out/latest_changes.md` — change-only human-readable report
 - `out/latest_alert.txt` — outbound alert text for messaging delivery
+- `index.html` — Alvento / SIA Watch landing page
+- `nhs-bid-watch.html` — Alvento / NHS Bid Watch landing page mockup
 
 ## Run
 
