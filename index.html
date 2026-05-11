@@ -486,6 +486,71 @@
     "brand": { "@type": "Brand", "name": "Alvento" }
   }
   </script>
+<!-- FAQ Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this already live?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The service is already running and the alert view on this page comes from the live monitor."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why not just check GOV.UK manually?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because the service stores a baseline, detects meaningful changes and only interrupts the team when something moved."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does an SIA licence cover?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Security Industry Authority licences three main areas: door supervision, close protection, and CCTV operation. Each licence has its own renewal cycle and training requirements. Changes to any of these can affect staffing decisions, so monitoring all three matters."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does an SIA licence last?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most SIA licences run for three years. refresher training is required during the validity period. Missing the training window can invalidate the licence. Wren tracks the official guidance so teams get an alert before the window closes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I trial Wren before committing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Start with a 7-day free trial — no card required. You'll see the live alert feed and get a genuine sample of what the monitoring output looks like before deciding whether to continue."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Wren cover close protection, door supervision and CCTV?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Currently focused on close protection licensing and training changes. Coverage includes renewals, refresher training requirements, and policy updates. Door supervision and CCTV monitoring are on the roadmap."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this legal advice?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. It is a monitoring service that points operators to changes, sources and extracted evidence faster."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <nav class="nav">
@@ -656,7 +721,7 @@
           <div class="section-head">
             <div>
               <h2>Pricing</h2>
-              <p>Simple plans for teams that want fewer manual checks and faster visibility when SIA guidance changes.</p>
+              <p>Simple plans for teams that want fewer manual checks and faster visibility when SIA guidance changes. <strong>Start free for 7 days — no card required.</strong></p>
             </div>
           </div>
           <div class="pricing">
@@ -711,6 +776,22 @@
             <div class="card faq-item offset">
               <h3>Why not just check GOV.UK manually?</h3>
               <p>Because the service stores a baseline, detects meaningful changes and only interrupts the team when something moved.</p>
+            </div>
+            <div class="card faq-item">
+              <h3>What does an SIA licence cover?</h3>
+              <p>Door supervision, close protection, and CCTV operation. Each has its own renewal cycle and training requirements. Wren monitors all three.</p>
+            </div>
+            <div class="card faq-item offset">
+              <h3>How long does an SIA licence last?</h3>
+              <p>Three years, with refresher training required during the validity period. Missing the training window invalidates the licence.</p>
+            </div>
+            <div class="card faq-item">
+              <h3>Can I trial Wren first?</h3>
+              <p>Yes — 7 days free, no card required. You see the live alert feed and get a genuine sample output before deciding whether to continue.</p>
+            </div>
+            <div class="card faq-item offset">
+              <h3>Does it cover close protection, door supervision and CCTV?</h3>
+              <p>Currently focused on close protection. Door supervision and CCTV monitoring are on the roadmap.</p>
             </div>
             <div class="card faq-item">
               <h3>Is this legal advice?</h3>
