@@ -365,11 +365,17 @@
       document.getElementById('results').style.display = 'block';
       document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-      // Email capture (no-op for now — hook up to your email provider)
       const email = document.getElementById('email').value;
       if (email) {
-        // POST to your email capture endpoint when ready
-        console.log('Email capture:', email, 'expiry:', expiry.toISOString());
+        fetch('https://alvento.ltd/api/capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            product: 'wren',
+            context: `SIA calculator — licence type: ${document.getElementById('licenceType').value}, expiry: ${expiry.toISOString().split('T')[0]}`
+          })
+        }).catch(() => {}); // silent fail — never block the user
       }
     }
 
